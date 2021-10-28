@@ -11,7 +11,7 @@ export class App extends Component {
     }
 
     componentDidMount () {
-        delay(2000)
+        delay(1000)
         .then(()=>{
            return fetch('https://reqres.in/api/users?page=2')
         })
@@ -19,9 +19,19 @@ export class App extends Component {
         .then(({data}) => this.setState({users: data})) 
     }
 
+    handleClick = (seachName) => { // !!!!!
+        const filteredUsers = this.state.users.filter(
+            ({last_name, first_name}) => 
+                last_name.toLowerCase().includes(seachName) 
+                || first_name.toLowerCase().includes(seachName)  
+        );
+
+        console.log(filteredUsers);
+    }
+
     render() {
         return (<div>
-            <SearchBar/>
+            <SearchBar whenClick={this.handleClick}/>
             <UserList users={this.state.users}/>
         </div>)
     }
