@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import cls from './SearchBar.module.css';
+import {Components} from './SearchBar.styled';
+// import cls from './SearchBar.module.css';
+
 
 export class SearchBar extends Component {
     state = {
@@ -8,24 +10,27 @@ export class SearchBar extends Component {
 
     handleChange = ({target: {value}}) => {
         this.setState(() => ({inputText: value}));
+        this.props.whenClick(value);
     }
 
     render() {
         return (
-            <div className={cls.SearchBar}>
+            // <div className={cls.SearchBar}>
+            <Components.Wrapper>
                 <h1>Search user</h1>
-                <input 
+                <Components.Input 
                     type='text'
-                    className={cls.SearchInput}
+                    value={this.state.inputText}
+                    // className={cls.SearchInput}
                     onChange={this.handleChange}/>
-                <button 
-                    className={cls.SearchButton}
+                <Components.Button 
+                    // className={cls.SearchButton}
                     onClick={() => {
                         this.props.whenClick(this.state.inputText)
                     }}> 
                         Find user
-                </button>
-            </div>
+                </Components.Button>
+            </Components.Wrapper>
         ); 
     }
 }

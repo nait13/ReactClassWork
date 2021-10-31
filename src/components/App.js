@@ -7,7 +7,8 @@ import './App.css';
 
 export class App extends Component {
     state = {
-        users: null
+        users: null,
+        filteredUsers: null
     }
 
     componentDidMount () {
@@ -16,23 +17,23 @@ export class App extends Component {
            return fetch('https://reqres.in/api/users?page=2')
         })
         .then((res) => res.json())
-        .then(({data}) => this.setState({users: data})) 
+        .then(({data}) => this.setState({users: data, filteredUsers: data}))
     }
 
-    handleClick = (seachName) => { // !!!!!
+    handleClick = (searchName) => {
         const filteredUsers = this.state.users.filter(
             ({last_name, first_name}) => 
-                last_name.toLowerCase().includes(seachName) 
-                || first_name.toLowerCase().includes(seachName)  
+                last_name.toLowerCase().includes(searchName) 
+                || first_name.toLowerCase().includes(searchName)  
         );
 
-        console.log(filteredUsers);
+        this.setState({filteredUsers});
     }
 
     render() {
         return (<div>
             <SearchBar whenClick={this.handleClick}/>
-            <UserList users={this.state.users}/>
+            <UserList users={this.state.filteredUsers}/>
         </div>)
     }
 }
