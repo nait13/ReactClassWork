@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import {SomeButton} from '../SomeButton/SomeButton';
 
 // const isDisabled = ({disabled}) => {disabled ? 'background: gray;' : 'background: orange;' }
+
+
 
 
 export const Components = {
@@ -44,5 +47,10 @@ export const Components = {
         @media screen and (max-width: 500px) {
             background: green;
         }
+    `,
+    CustomSomeButton: styled(SomeButton)`
+        border: 2px solid red;
+        margin: 20px;
     `
 };
+

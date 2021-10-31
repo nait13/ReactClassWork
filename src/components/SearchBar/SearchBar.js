@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Components} from './SearchBar.styled';
-// import cls from './SearchBar.module.css';
+
 
 
 export class SearchBar extends Component {
@@ -23,13 +23,14 @@ export class SearchBar extends Component {
                     value={this.state.inputText}
                     // className={cls.SearchInput}
                     onChange={this.handleChange}/>
-                <Components.Button 
+                <button 
                     // className={cls.SearchButton}
                     onClick={() => {
                         this.props.whenClick(this.state.inputText)
                     }}> 
                         Find user
-                </Components.Button>
+                </button>
+                <Components.CustomSomeButton/>
             </Components.Wrapper>
         ); 
     }
