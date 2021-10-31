@@ -3,9 +3,6 @@ import {SomeButton} from '../SomeButton/SomeButton';
 
 // const isDisabled = ({disabled}) => {disabled ? 'background: gray;' : 'background: orange;' }
 
-
-
-
 export const Components = {
     Wrapper: styled.div`
         width: 80%;

@@ -1,5 +1,7 @@
 import './SomeButton.css';
 
-export const SomeButton = () => {
-    return (<button className='some-button'>IM SOMEBUTTON!</button>)
+export const SomeButton = ({className}) => {
+    return (<div>
+            <button className={className + ' some-button'}>IM SOMEBUTTON!</button>
+        </div>)
 }
