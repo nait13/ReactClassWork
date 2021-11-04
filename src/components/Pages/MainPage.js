@@ -1,9 +1,10 @@
+import React,{Component} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
 
-const {Wrapper, CustomLink} = {
+const {Wrapper , CustomLink , UserWrapper, UserInput , UserHeader} = {
     Wrapper:styled.div`
         margin: 100px auto;
         width: 80%;
@@ -13,6 +14,27 @@ const {Wrapper, CustomLink} = {
         text-align: center;
 
     `,
+    UserWrapper: styled.div`
+        border: 1px solid salmon;
+        padding: 10px;
+        width:90%;
+        margin: 20px auto;
+    
+    `
+    ,
+    UserInput:styled.input`
+        display:block;
+        outline:none;
+        border: 1px solid salmon;
+        font-size:20px;
+        margin:10px auto;
+    `,
+    UserHeader:styled.h2`
+        font-size:30px;
+        font-weight: bold;
+        text-align:center;
+    `
+    ,
     CustomLink:styled(Link)`
         text-decoration: none;
         font-weight: 400;
@@ -34,13 +56,28 @@ const {Wrapper, CustomLink} = {
     
 }
 
+export class MainPage extends Component {
+    state = {
+        userId: '',
+    }
 
-export const MainPage = () => {
-    return (
-        <Wrapper>
-            <h1>MainPage</h1>
-            <CustomLink to = '/search'> Search user </CustomLink>
-        </Wrapper>
-        
-    )
+    changeHandler = ({target:{value}}) => {
+        this.setState(()=>({userId:value}))
+    }
+
+   render() {
+        return (
+            <Wrapper>
+                <h1>MainPage</h1>
+                <CustomLink to = '/search'> Search user </CustomLink>
+                <UserWrapper> 
+                    <UserHeader>Enter user id</UserHeader>
+                    <UserInput 
+                        value = {this.state.userId}
+                        onChange = {this.changeHandler}/>
+                    <CustomLink to = {`/user/${this.state.userId}`}>Go to user</CustomLink>
+                </UserWrapper>
+            </Wrapper>
+        )
+    }
 }

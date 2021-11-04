@@ -9,7 +9,7 @@ ReactDOM.render(
     <Routes>
       <Route path = '/' element = {<MainPage/>}/>
       <Route path = '/search' element = {<SearchUserPage/>}/>
-      <Route path = '/user' element = {<UserPage/>}/>
+      <Route path = '/user/:userId' element = {<UserPage/>}/>
       <Route path = '*' element = {<NotFoundPage/>}/>
     </Routes>
   </Router>,
