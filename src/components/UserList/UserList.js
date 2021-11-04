@@ -12,7 +12,7 @@ export class UserList extends Component {
             ? <ul className={cls.UserList}>
                 { users.map(({id, ...otherProps}) => (<User key={id} {...otherProps} />)) }
             </ul>
-            : <img src={loaderSrc}/>
+            : <img src={loaderSrc} alt = 'preloder'/>
         )
     }
 }

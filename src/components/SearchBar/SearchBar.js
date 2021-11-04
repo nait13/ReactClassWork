@@ -24,23 +24,13 @@ export class SearchBar extends Component {
 
     render() {
         return (
-            // <div className={cls.SearchBar}>
             <Components.Wrapper>
                 <h1>Search user</h1>
                 <Components.Input 
                     ref={this.inputRef}
                     type='text'
                     value={this.state.inputText}
-                    // className={cls.SearchInput}
                     onChange={this.handleChange}/>
-                {/* <button 
-                    // className={cls.SearchButton}
-                    onClick={() => {
-                        this.props.whenClick(this.state.inputText)
-                    }}> 
-                        Find user
-                </button> */}
-                {/* <Components.CustomSomeButton/> */}
             </Components.Wrapper>
         ); 
     }

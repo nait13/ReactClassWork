@@ -6,7 +6,7 @@ export const User = ({first_name, last_name, avatar}) => {
     return (
         <li className={cls.User}>
             <div>
-                <img src={avatar}/>
+                <img src={avatar} alt = "avatar"/>
             </div>
             <div>{`${first_name} ${last_name}`}</div>
         </li>

@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {App} from './components/App';
-
+import {BrowserRouter as Router , Route , Routes} from 'react-router-dom'
+import {SearchUserPage , UserPage , MainPage , NotFoundPage} from './components/Pages';
+import './index.css';
 
 ReactDOM.render(
-  <App/>,
+  <Router>
+    <Routes>
+      <Route path = '/' element = {<MainPage/>}/>
+      <Route path = '/search' element = {<SearchUserPage/>}/>
+      <Route path = '/user' element = {<UserPage/>}/>
+      <Route path = '*' element = {<NotFoundPage/>}/>
+    </Routes>
+  </Router>,
   document.getElementById('root')
 );
 
