@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom"
-import { useEffect } from "react";
-
+import { useEffect ,useState } from "react";
+import {User} from '../User/User.js'
+import cls from '../UserList/UserList.module.css'
 
 export const UserPage = () => {
+
+    const [oneUser,setOneUser] = useState(null);
+
     const {userId}= useParams();
+
     useEffect(()=>{
         fetch(`https://reqres.in/api/users/${userId}`)
         .then((res)=>{
@@ -13,11 +18,16 @@ export const UserPage = () => {
             }
             return res.json()
         })
-        .then((res)=>{console.log(res)})
-        .catch(()=>{})
+        .then(({data})=>{setOneUser(data)})
+        .catch((cat)=>{setOneUser(cat)})
     },[])
-
-
-    return (<h1>UserPage{userId}</h1>)
+    return (
+        <div>
+            <h1>UserPage{userId}</h1>
+            <div className = {cls.UserList}>
+                <User {...oneUser}/>
+            </div>
+        </div>
+    )
 
 }

@@ -1,39 +1,41 @@
-import React, {Component} from 'react';
+import React,{useState,useEffect} from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { UserList } from '../UserList/UserList';
 import {delay} from '../../utils/delay';
 
 
 
-export class SearchUserPage extends Component {
-    state = {
-        users: null,
-        filteredUsers: null
-    }
+export const SearchUserPage = () =>{
 
-    componentDidMount () {
+    const [userState,setUserState] = useState({users:null , filtere: null});
+   
+
+    useEffect(()=>{
         delay(1000)
         .then(()=>{
-           return fetch('https://reqres.in/api/users?page=2')
-        })
+            return fetch('https://reqres.in/api/users?page=2')
+         })
         .then((res) => res.json())
-        .then(({data}) => this.setState({users: data, filteredUsers: data}))
-    }
-
-    handleClick = (searchName) => {
-        const filteredUsers = this.state.users.filter(
+        .then(({data}) => setUserState({users: data, filteredUsers: data}))
+    },[])
+    console.log(userState)
+    const handleClick = (searchName) => {
+        console.log("HANDLE CLIK")
+        const filteredUsers = userState.users.filter(
             ({last_name, first_name}) => 
                 last_name.toLowerCase().includes(searchName) 
                 || first_name.toLowerCase().includes(searchName)  
         );
 
-        this.setState({filteredUsers});
+        setUserState({users: userState.users, filteredUsers: filteredUsers});
     }
 
-    render() {
-        return (<div>
-            <SearchBar whenClick={this.handleClick}/>
-            <UserList users={this.state.filteredUsers}/>
-        </div>)
-    }
+
+    return (
+        <div>
+            <SearchBar whenClick={handleClick}/>
+            <UserList users={userState.filteredUsers}/>
+        </div>
+    )
+    
 }
