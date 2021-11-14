@@ -2,14 +2,15 @@ import React from 'react';
 import cls from './User.module.css';
 
 
-export const User = ({first_name, last_name, avatar}) => {
+export const User = ({first_name, last_name, avatar,email}) => {
     return (
-        <li className={cls.User}>
+        <div className={cls.User}>
             <div>
                 <img src={avatar} alt = "avatar"/>
             </div>
             <div>{`${first_name} ${last_name}`}</div>
-        </li>
+            <div>{email}</div>
+        </div>
     );
 };
 
