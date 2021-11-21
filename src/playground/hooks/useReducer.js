@@ -1,27 +1,45 @@
 import { useReducer, useState } from "react"
+import { act } from "react-dom/test-utils";
+
+
+const actions = {
+    ADD_APPLE : 'ADD_APPLE',
+    SELL_APPLE: 'SELL_APPLE',
+    CHANGE_AMOUNT:"CHANHE_AMOUNT"
+}
 
 const innitialState = {
         apples:[1,2,3,4,5],
         isSold:false,
-        weight: 200,
-        name: 'MackBoo'
+        inputAmount: 0,
 };
 
 const reducer = (state, action) => {
     console.log("REDUCER WORK",state);
     switch (action.type) {
-        case 'ADD_APPLE':
+
+        case actions.ADD_APPLE:
+            const biggerAppleArr = [...state.apples];
+            for (let  i = 0 ;i<+state.inputAmount;i++) {
+                biggerAppleArr.push(biggerAppleArr.length)
+            }
+
             return {
-                apples:[...state.apples,state.apples.length+1],
+                ...state,
+                apples:biggerAppleArr,
                 isSold:false,
             };
-
-        case 'SELL_APPLE':
-            const newApplesArr = state.apples.slice(0,state.apples.length-1);
+        case actions.SELL_APPLE:
+            const newApplesArr = state.apples.slice(0,state.apples.length - state.inputAmount);
             return {
                 ...state,
                 apples: newApplesArr,
                 isSold: newApplesArr.length <= 2, 
+            };
+        case actions.CHANGE_AMOUNT:
+            return {
+                ...state,
+                inputAmount:action.payload
             };
         default:
             return state;
@@ -31,8 +49,9 @@ const reducer = (state, action) => {
 
 export const Example = () => {
     const [state , dispatch] = useReducer(reducer, innitialState);
-    const addApple = () => dispatch({type:"ADD_APPLE"})
-    const sellApple = () => dispatch({type:'SELL_APPLE'});
+    const addApple = () => dispatch({type:actions.ADD_APPLE})
+    const sellApple = () => dispatch({type:actions.SELL_APPLE});
+    const inputHandler = ({target:{value}}) => dispatch ({type:actions.CHANGE_AMOUNT , payload:value});
 
     return (
         <>
@@ -41,6 +60,7 @@ export const Example = () => {
         </div>
         <div>Are apples sold: {String(state.isSold)}</div>
         <div>
+            <input value = {state.inputAmount} onChange = {inputHandler}/>
             <button onClick = {addApple}>Add apple</button>
             <button onClick = {sellApple}>Sell apple</button>
         </div>
