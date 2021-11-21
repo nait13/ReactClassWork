@@ -49,8 +49,8 @@ const reducer = (state, action) => {
 
 export const Example = () => {
     const [state , dispatch] = useReducer(reducer, innitialState);
-    const addApple = () => dispatch({type:actions.ADD_APPLE})
-    const sellApple = () => dispatch({type:actions.SELL_APPLE});
+    const addHandler = () => dispatch({type:actions.ADD_APPLE})
+    const sellHandler = () => dispatch({type:actions.SELL_APPLE});
     const inputHandler = ({target:{value}}) => dispatch ({type:actions.CHANGE_AMOUNT , payload:value});
 
     return (
@@ -61,8 +61,8 @@ export const Example = () => {
         <div>Are apples sold: {String(state.isSold)}</div>
         <div>
             <input value = {state.inputAmount} onChange = {inputHandler}/>
-            <button onClick = {addApple}>Add apple</button>
-            <button onClick = {sellApple}>Sell apple</button>
+            <button onClick = {addHandler}>Add apple</button>
+            <button onClick = {sellHandler}>Sell apple</button>
         </div>
         </>
     )
