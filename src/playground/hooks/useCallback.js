@@ -1,16 +1,10 @@
 import { useState , useCallback , memo , useMemo} from 'react';
 
-const items = [
-    {id:1,name:'First'},
-    {id:2,name:'Second'},
-    {id:3,name:'Thrid'},
-]
 
 const Item  = memo(({itemData:{id,name},clickHandler}) => {
     console.log(`${id} item RENDERS!`)
     return <div onClick = {() => clickHandler(id)}>{name}</div>
 });
-
 
 
 
